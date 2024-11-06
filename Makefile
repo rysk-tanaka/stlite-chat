@@ -17,7 +17,7 @@ clean:
 	find . -type f -name "*.pyc" -delete
 
 run:
-	streamlit run src/app.py
+	streamlit run $(if $(INPUT),$(INPUT),src/app.py)
 
 build:
 	mkdir -p build
