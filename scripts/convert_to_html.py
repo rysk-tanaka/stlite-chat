@@ -1,4 +1,5 @@
 import os
+import argparse
 
 
 def read_file(file_path):
@@ -20,8 +21,17 @@ def create_index_html(app_content, requirements=None):
 
 
 def main():
-    # src/app.pyの内容を読み込む
-    app_content = read_file("src/app.py")
+    # コマンドライン引数のパーサーを作成
+    parser = argparse.ArgumentParser(description='Convert Python file to HTML')
+    parser.add_argument('--input', '-i',
+                       default='src/app.py',
+                       help='Input Python file path (default: src/app.py)')
+
+    # 引数をパース
+    args = parser.parse_args()
+
+    # 指定されたファイルの内容を読み込む
+    app_content = read_file(args.input)
 
     # index.htmlを生成
     html_content = create_index_html(app_content)

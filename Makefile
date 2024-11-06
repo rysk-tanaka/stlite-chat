@@ -20,4 +20,5 @@ run:
 	streamlit run src/app.py
 
 build:
-	uv run scripts/convert_to_html.py
+	mkdir -p build
+	uv run scripts/convert_to_html.py $(if $(INPUT),--input $(INPUT),)
