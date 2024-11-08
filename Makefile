@@ -17,7 +17,8 @@ clean:
 	find . -type f -name "*.pyc" -delete
 
 run:
-	streamlit run src/app.py
+	streamlit run $(if $(INPUT),$(INPUT),src/app.py) --server.headless=true
 
 build:
-	uv run scripts/convert_to_html.py
+	mkdir -p build
+	uv run scripts/convert_to_html.py $(if $(INPUT),--input $(INPUT),)
